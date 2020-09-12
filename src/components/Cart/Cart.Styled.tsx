@@ -10,7 +10,19 @@ const Cart = styled.div<{ open: boolean }>`
   height: 100vh;
   background: white;
   transform: translate3d(${(p) => (p.open ? 0 : "100%")}, 0, 0);
-  transition: 200ms ease-out transform;
+  transition: 200ms transform ease-out;
+`;
+
+const Shadow = styled.div<{ open: boolean }>`
+  background: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: ${(p) => (p.open ? 0.2 : 0)};
+  pointer-events: ${(p) => (p.open ? "all" : "none")};
+  transition: 200ms opacity ease-out;
 `;
 
 const LineItem = styled(LineItemNode.Wrapper)`
@@ -20,6 +32,7 @@ const LineItem = styled(LineItemNode.Wrapper)`
 `;
 
 export default {
+  Shadow,
   LineItem,
   Cart,
 };
