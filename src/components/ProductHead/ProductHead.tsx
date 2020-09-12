@@ -1,8 +1,4 @@
-import {
-  AddToCartButton,
-  ProductOptions,
-  useProduct,
-} from "@tylermcrobert/shopify-react";
+import { ProductOptions, useProduct } from "@tylermcrobert/shopify-react";
 import { QtySelect } from "components";
 import React from "react";
 import S from "./ProductHead.Styled";
@@ -22,7 +18,7 @@ const ProductHead = () => {
           onUpdate={(num) => setQuantity(num)}
           value={productState.quantity}
         />
-        <AddToCartButton />
+        <S.AddToCart />
         {product.descriptionHtml && (
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
         )}
