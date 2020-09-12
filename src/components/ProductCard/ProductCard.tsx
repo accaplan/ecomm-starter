@@ -9,13 +9,15 @@ const ProductCard = () => {
   const image = product.images && product.images[0]?.src;
 
   return (
-    <Link as={`/products/${product.handle}`} href="products/[handle]">
-      <S.ProductCard>
-        {product.title}
-        {image && <img src={image} />}
-        <AddToCartButton />
-      </S.ProductCard>
-    </Link>
+    <S.ProductCard>
+      <Link as={`/products/${product.handle}`} href="products/[handle]">
+        <a>
+          {product.title}
+          {image && <img src={image} />}
+        </a>
+      </Link>
+      <AddToCartButton />
+    </S.ProductCard>
   );
 };
 
