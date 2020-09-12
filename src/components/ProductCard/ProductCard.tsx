@@ -4,12 +4,13 @@ import S from "./ProductCard.Styled";
 
 const ProductCard = () => {
   const { product } = useProduct();
-  console.log(product.vendor);
+
+  const image = product.images && product.images[0]?.src;
 
   return (
     <S.ProductCard>
       {product.title}
-      <img src={product.images[0].src} />
+      {image && <img src={image} />}
       <AddToCartButton />
     </S.ProductCard>
   );

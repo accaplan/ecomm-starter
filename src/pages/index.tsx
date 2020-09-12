@@ -3,11 +3,12 @@ import {
   ProductProvider,
   useCart,
 } from "@tylermcrobert/shopify-react";
-import { Layout, ProductCard } from "../components";
+import ProductCard from "components/ProductCard/ProductCard";
+import { Layout } from "../components";
 import { client } from "./_app";
 
 const Index: React.FC<{ products: Product[] }> = ({ products }) => {
-  const { openCart, ...props } = useCart();
+  const { openCart } = useCart();
 
   return (
     <Layout>
