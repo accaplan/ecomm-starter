@@ -4,7 +4,7 @@ import {
   useCart,
 } from "@tylermcrobert/shopify-react";
 import ProductCard from "components/ProductCard/ProductCard";
-import { Layout } from "../components";
+import { Layout, ProductGrid } from "../components";
 import { client } from "./_app";
 
 const Index: React.FC<{ products: Product[] }> = ({ products }) => {
@@ -13,11 +13,13 @@ const Index: React.FC<{ products: Product[] }> = ({ products }) => {
   return (
     <Layout>
       <div onClick={openCart}>cart</div>
-      {products.map((product) => (
-        <ProductProvider product={product} key={product.id}>
-          <ProductCard />
-        </ProductProvider>
-      ))}
+      <ProductGrid>
+        {products.map((product) => (
+          <ProductProvider product={product} key={product.id}>
+            <ProductCard />
+          </ProductProvider>
+        ))}
+      </ProductGrid>
     </Layout>
   );
 };
