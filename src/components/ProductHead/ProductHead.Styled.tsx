@@ -8,11 +8,11 @@ const ProductHead = styled.div`
   gap: ${size[0]};
 `;
 
-const AddToCart = styled(AddToCartButton)`
-  background: ${color.primary};
+const AddToCart = styled(AddToCartButton)<{ unavailable: boolean }>`
   color: white;
   padding: ${size.xs} ${size[0]};
   border-radius: 555px;
+  background: ${(p) => (p.unavailable ? "gray" : color.primary)};
 `;
 
 export default {

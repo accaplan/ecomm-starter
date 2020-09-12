@@ -21,7 +21,7 @@ const stores = {
   },
 };
 
-export const client = Client.buildClient(stores.pistils);
+export const client = Client.buildClient(stores.highTide);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

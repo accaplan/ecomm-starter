@@ -18,7 +18,7 @@ const ProductHead = () => {
           onUpdate={(num) => setQuantity(num)}
           value={productState.quantity}
         />
-        <S.AddToCart />
+        <S.AddToCart unavailable={!productState.currentVariant.available} />
         {product.descriptionHtml && (
           <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
         )}
