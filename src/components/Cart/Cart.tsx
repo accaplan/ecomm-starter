@@ -17,7 +17,7 @@ const Cart = () => {
         <div>Cart</div>
         <CloseCartButton />
         {shopifyCheckout?.lineItems.map((lineItem) => (
-          <S.LineItem data={lineItem}>
+          <S.LineItem data={lineItem} key={lineItem.id}>
             <LineItem.Image />
             <div>
               <LineItem.Title />
