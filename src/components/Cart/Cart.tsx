@@ -4,21 +4,17 @@ import {
   useCart,
 } from "@tylermcrobert/shopify-react";
 import React from "react";
+import S from "./Cart.Styled";
 
 const Cart = () => {
   const { isCartOpen } = useCart();
 
   return (
-    <div
-      className={["cart", isCartOpen && "-visible"]
-        .map((item) => item)
-        .join(" ")}
-    >
+    <S.Cart open={isCartOpen}>
       <div>Cart</div>
-
       <CloseCartButton />
       <CheckoutLink />
-    </div>
+    </S.Cart>
   );
 };
 
