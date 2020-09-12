@@ -5,3 +5,4 @@ export { default as ErrorBanners } from "./ErrorBanners/ErrorBanners";
 export { default as ProductGrid } from "./ProductGrid/ProductGrid";
 export { default as ProductHead } from "./ProductHead/ProductHead";
 export { default as QtySelect } from "./QtySelect/QtySelect";
+export { default as Nav } from "./Nav/Nav";
