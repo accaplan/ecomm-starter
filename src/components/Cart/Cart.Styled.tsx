@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LineItem as LineItemNode } from "@tylermcrobert/shopify-react";
 
 const Cart = styled.div<{ open: boolean }>`
   width: 100%;
@@ -12,6 +13,13 @@ const Cart = styled.div<{ open: boolean }>`
   transition: 200ms ease-out transform;
 `;
 
+const LineItem = styled(LineItemNode.Wrapper)`
+  border: 1px solid blue;
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+`;
+
 export default {
+  LineItem,
   Cart,
 };
