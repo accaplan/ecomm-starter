@@ -1,11 +1,23 @@
-import { useCart } from "@tylermcrobert/shopify-react";
+import {
+  CheckoutLink,
+  CloseCartButton,
+  useCart,
+} from "@tylermcrobert/shopify-react";
 import React from "react";
 
 const Cart = () => {
-  const cart = useCart();
+  const { isCartOpen } = useCart();
+
   return (
-    <div className="cart">
-      Im a cart is cart open: {cart.isCartOpen.toString()}
+    <div
+      className={["cart", isCartOpen && "-visible"]
+        .map((item) => item)
+        .join(" ")}
+    >
+      <div>Cart</div>
+
+      <CloseCartButton />
+      <CheckoutLink />
     </div>
   );
 };

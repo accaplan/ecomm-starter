@@ -1,15 +1,29 @@
-import { useCart } from "@tylermcrobert/shopify-react";
-import { Layout } from "../components";
+import {
+  Product,
+  ProductProvider,
+  useCart,
+} from "@tylermcrobert/shopify-react";
+import { Layout, ProductCard } from "../components";
+import { client } from "./_app";
 
-const Index = () => {
-  const { openCart } = useCart();
+const Index: React.FC<{ products: Product[] }> = ({ products }) => {
+  const { openCart, ...props } = useCart();
 
   return (
     <Layout>
       <div onClick={openCart}>cart</div>
-      Content
+      {products.map((product) => (
+        <ProductProvider product={product} key={product.id}>
+          <ProductCard />
+        </ProductProvider>
+      ))}
     </Layout>
   );
+};
+
+export const getStaticProps = async () => {
+  const products = JSON.parse(JSON.stringify(await client.product.fetchAll()));
+  return { props: { products } };
 };
 
 export default Index;

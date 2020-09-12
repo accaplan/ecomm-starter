@@ -1035,10 +1035,10 @@
   resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-9.5.3.tgz#a14fb6489d412b201b98aa44716fb8727ca4c6ae"
   integrity sha512-W3VKOqbg+4Kw+k6M/SODf+WIzwcx60nAemGV1nNPa/yrDtAS2YcJfqiswrJ3+2nJHzqefAFWn4XOfM0fy8ww2Q==
 
-"@tylermcrobert/shopify-react@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@tylermcrobert/shopify-react/-/shopify-react-0.3.2.tgz#7014ec9294579d881ca22e7874333d68aaae26e3"
-  integrity sha512-qQS2wcMeR0ysZeMQ0Tr7bKrM4mWdmP44nXpAWzBVq/Kb+xS3kJV2wtOSbNEWsCBicZvTrfLZyfefWszrAdTT9A==
+"@tylermcrobert/shopify-react@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@tylermcrobert/shopify-react/-/shopify-react-0.3.3.tgz#2bd344bc7dd6b91defaa62e65a6a7c101d7c0e76"
+  integrity sha512-Yb9WvqIrRZ6rzWPkPucy+NdCvIBvpjPIlB4XST+7AbTRNMrggLmKl/MT8i5x8a1Ytt/WId1FXKaFD8CwWh1/yg==
   dependencies:
     reinspect "^1.1.0"
     shopify-buy "^2.11.0"
