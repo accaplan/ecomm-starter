@@ -1,9 +1,9 @@
 import {
   AddToCartButton,
   ProductOptions,
-  QtySelector,
   useProduct,
 } from "@tylermcrobert/shopify-react";
+import { QtySelect } from "components";
 import React from "react";
 import S from "./ProductHead.Styled";
 
@@ -18,7 +18,7 @@ const ProductHead = () => {
       <div>
         <h1>{product.title}</h1>
         <ProductOptions />
-        <QtySelector
+        <QtySelect
           onUpdate={(num) => setQuantity(num)}
           value={productState.quantity}
         />
