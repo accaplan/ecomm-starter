@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { LineItem as LineItemNode } from "@tylermcrobert/shopify-react";
+import { size } from "style";
 
 const Cart = styled.div<{ open: boolean }>`
   width: 100%;
@@ -11,6 +12,7 @@ const Cart = styled.div<{ open: boolean }>`
   background: white;
   transform: translate3d(${(p) => (p.open ? 0 : "100%")}, 0, 0);
   transition: 200ms transform ease-out;
+  padding: ${size[0]};
 `;
 
 const Shadow = styled.div<{ open: boolean }>`

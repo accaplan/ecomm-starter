@@ -11,6 +11,7 @@
   "author": "Tyler McRobert",
   "license": "ISC",
   "dependencies": {
+    "@tylermcrobert/modularscale": "^1.1.0",
     "@tylermcrobert/shopify-react": "^0.3.3",
     "next": "^9.5.3",
     "react": "^16.13.1",
