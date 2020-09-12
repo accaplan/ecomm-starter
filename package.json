@@ -1,0 +1,24 @@
+{
+  "name": "ecomm-starter",
+  "version": "0.0.1",
+  "description": "A starter template for e commerce websites",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "Tyler McRobert",
+  "license": "ISC",
+  "dependencies": {
+    "@tylermcrobert/shopify-react": "^0.3.2",
+    "next": "^9.5.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.10.1",
+    "@types/react": "^16.9.49",
+    "typescript": "^4.0.2"
+  }
+}
