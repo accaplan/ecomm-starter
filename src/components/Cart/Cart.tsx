@@ -24,6 +24,7 @@ const Cart = () => {
               <LineItem.Variant />
               <LineItem.Price />
               <LineItem.Remove />
+              <LineItem.Quantity />
             </div>
           </S.LineItem>
         ))}
