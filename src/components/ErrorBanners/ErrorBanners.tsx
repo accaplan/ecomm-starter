@@ -7,7 +7,7 @@ const ErrorBanners = () => {
   return (
     <>
       {cart.errorAdding && <div>There was an error adding to your cart</div>}
-      {cart.cartFetchError && <div>There was an error fetching your</div>}
+      {cart.cartFetchError && <div>There was an error fetching your cart</div>}
     </>
   );
 };
