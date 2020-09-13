@@ -1,4 +1,5 @@
-import { ProductOptions, useProduct } from "@tylermcrobert/shopify-react";
+import { ProductOptions } from "@tylermcrobert/shopify-react";
+import { useProduct } from "@tylermcrobert/shopify-react";
 import { QtySelect } from "components";
 import React from "react";
 import S from "./ProductHead.Styled";
@@ -26,4 +27,5 @@ const ProductHead = () => {
     </S.ProductHead>
   );
 };
+
 export default ProductHead;

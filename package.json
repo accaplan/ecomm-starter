@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@tylermcrobert/modularscale": "^1.1.0",
-    "@tylermcrobert/shopify-react": "^0.3.6",
+    "@tylermcrobert/shopify-react": "^0.3.7",
     "next": "^9.5.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
