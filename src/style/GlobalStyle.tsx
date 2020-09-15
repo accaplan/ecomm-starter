@@ -1,12 +1,20 @@
 import { createGlobalStyle, css } from "styled-components";
 import { scale, size } from "./theme";
 import reset from "styled-reset";
+import NavStyle from "../components/Nav/Nav.Styled";
 
 const TEMPORARY_STYLES_TO_DELETE = css`
   html,
   body {
+    line-height: 1.2;
     font-family: helvetica, arial, sans-serif;
+    font-size: 18px;
   }
+
+  body {
+    padding: ${size[0]};
+  }
+
   h5 {
     font-size: ${size[0]};
   }
@@ -20,7 +28,11 @@ const TEMPORARY_STYLES_TO_DELETE = css`
     font-size: ${size[3]};
   }
   h1 {
-    font-size: ${size[4]};
+    font-size: ${size[5]};
+  }
+
+  ${NavStyle.Nav} {
+    padding-bottom: ${size[0]};
   }
 `;
 

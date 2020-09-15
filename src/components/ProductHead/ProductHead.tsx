@@ -31,6 +31,11 @@ const ProductHead = () => {
 const ProductOptions = () => {
   const { product, productState, setOptions } = useProduct();
 
+  const hasOptions =
+    product.options.filter((item) => item.values.length > 1).length > 0;
+
+  if (!hasOptions) return null;
+
   return (
     <S.ProductOptions>
       {product.options.map(({ name, values }) => {
