@@ -32,7 +32,7 @@ const ProductOptions = () => {
   const { product, productState, setOptions } = useProduct();
 
   return (
-    <div>
+    <S.ProductOptions>
       {product.options.map(({ name, values }) => {
         const isSelected = (optionName: string, optionValue: string) =>
           productState.currentVariant.selectedOptions.filter(
@@ -40,25 +40,28 @@ const ProductOptions = () => {
           )[0].value === optionValue;
 
         return (
-          <div key={name}>
+          <React.Fragment key={name}>
             {name !== "Title" && <div>{name}</div>}
-            {values.map(({ value }) => {
-              const selected = isSelected(name, value);
-              return (
-                value !== "Default Title" && (
-                  <VariantSelect
-                    key={value}
-                    onChange={() => setOptions({ [name]: value })}
-                    value={value}
-                    selected={selected}
-                  />
-                )
-              );
-            })}
-          </div>
+            <ul>
+              {values.map(({ value }) => {
+                const selected = isSelected(name, value);
+                return (
+                  value !== "Default Title" && (
+                    <VariantSelect
+                      key={value}
+                      onChange={() => setOptions({ [name]: value })}
+                      value={value}
+                      selected={selected}
+                      name={name}
+                    />
+                  )
+                );
+              })}
+            </ul>
+          </React.Fragment>
         );
       })}
-    </div>
+    </S.ProductOptions>
   );
 };
 
@@ -68,17 +71,19 @@ const ProductOptions = () => {
  */
 
 const VariantSelect: React.FC<
-  React.HTMLAttributes<HTMLDivElement> & {
+  React.HTMLAttributes<HTMLLIElement> & {
     /** Text value for label */
     value: string;
     /** Function that is called on happens on select */
     onChange: () => any;
     /** Is option active */
     selected: boolean;
+    /** Category name */
+    name: string;
   }
-> = ({ onChange, value, selected, ...props }) => {
+> = ({ onChange, value, selected, name, ...props }) => {
   return (
-    <div {...props}>
+    <S.InputWrap {...props} selected={selected} onClick={onChange}>
       <input
         type="radio"
         name={name}
@@ -88,7 +93,7 @@ const VariantSelect: React.FC<
         onChange={onChange}
       />
       <label htmlFor={value}>{value}</label>
-    </div>
+    </S.InputWrap>
   );
 };
 export default ProductHead;

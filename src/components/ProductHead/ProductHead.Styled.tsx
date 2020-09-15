@@ -15,7 +15,34 @@ const AddToCart = styled(AddToCartButton)<{ unavailable: boolean }>`
   background: ${(p) => (p.unavailable ? "gray" : color.primary)};
 `;
 
+const ProductOptions = styled.div`
+  margin: ${size[0]} 0;
+  cursor: pointer;
+
+  ul {
+    display: flex;
+
+    li {
+      text-align: center;
+      padding: ${size[0]};
+    }
+  }
+`;
+
+const InputWrap = styled.li<{ selected: boolean }>`
+  background: ${(p) => p.selected && color.primary};
+  color: ${(p) => p.selected && "white"};
+  cursor: pointer;
+  display: block;
+
+  input[type="radio"] {
+    display: none;
+  }
+`;
+
 export default {
+  ProductOptions,
+  InputWrap,
   AddToCart,
   ProductHead,
 };
