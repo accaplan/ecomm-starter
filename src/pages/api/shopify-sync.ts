@@ -6,4 +6,5 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   console.log(req.body);
+  res.json({ success: true });
 };
