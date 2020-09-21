@@ -9,9 +9,12 @@ export const client = sanityClient({
   token: process.env.SANITY_TOKEN,
 });
 
+// TODO: verify webhook
+//https://shopify.dev/tutorials/manage-webhooks#verify-webhook
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const setErr = (code: number, message: string, err: any | null) => {
-    console.log(err);
+    console.error(err);
     res.status(code).json({ error: true, message: message });
     return null;
   };
@@ -25,6 +28,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data: Product = req.body;
 
+  /**
+   * Format for Sanity
+   */
   const sanityProduct = {
     _type: "product",
     _id: data.id.toString(),
@@ -32,6 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     title: data.title,
   };
 
+  /** Add product to sanity */
   try {
     await client.transaction().createIfNotExists(sanityProduct).commit();
     res.json({ success: true });
