@@ -35,6 +35,7 @@ class ShopifySyncClass {
 
   init() {
     console.log(this.req.body);
+    this.res.json({});
 
     // this.validateRequest();
     // this.doSanityTransaction();
