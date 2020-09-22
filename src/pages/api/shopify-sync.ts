@@ -69,6 +69,21 @@ class ShopifySyncClass {
       _id: webhookData.id.toString(),
       slug: { current: webhookData.handle },
       title: webhookData.title,
+      shopify: {
+        productId: webhookData.id,
+        title: webhookData.title,
+        defaultPrice: webhookData.variants[0].price,
+        defaultVariant: {
+          title: webhookData.variants[0].title,
+          price: webhookData.variants[0].price,
+          sku: webhookData.variants[0].sku,
+          variantId: webhookData.variants[0].id,
+          taxable: webhookData.variants[0].taxable,
+          inventoryQuantity: webhookData.variants[0].inventory_quantity,
+          inventoryPolicy: webhookData.variants[0].inventory_policy,
+          barcode: webhookData.variants[0].barcode,
+        },
+      },
     };
 
     const productVariants = webhookData.variants.map((variant) => ({
@@ -170,8 +185,23 @@ class ShopifySyncClass {
     );
 
     /**
+     * Include variants on product document
+     */
+
+    tx = tx.patch(webhookData.id.toString(), (p) =>
+      p.set({
+        "shopify.variants": webhookData.variants.map((variant) => ({
+          _type: "reference",
+          _ref: variant.id.toString(),
+          _key: variant.id.toString(),
+        })),
+      })
+    );
+
+    /**
      * Commit
      */
+
     const result = await tx.commit();
     this.res.json({ result });
   }
