@@ -64,7 +64,9 @@ class ShopifySyncClass {
   getFormattedData() {
     const webhookData: ShopifyWebhookRes = this.req.body;
 
-    const sanityProduct = {
+    console.log(webhookData);
+
+    const sanityProduct: SanityProduct = {
       _type: "product",
       _id: webhookData.id.toString(),
       slug: { current: webhookData.handle },
@@ -214,6 +216,7 @@ class ShopifySyncClass {
     existingSanityProduct: SanityProduct,
     webhookData: ShopifyWebhookRes
   ) {
-    console.log(existingSanityProduct, webhookData);
+    // console.log(existingSanityProduct, webhookData);
+    this.res.json({ msg: "partial update" });
   }
 }
