@@ -32,6 +32,8 @@ class ShopifySyncClass {
    */
 
   init() {
+    console.log(this.req.body);
+
     this.validateRequest();
     this.doSanityTransaction();
   }
@@ -63,8 +65,6 @@ class ShopifySyncClass {
    */
   getFormattedData() {
     const webhookData: ShopifyWebhookRes = this.req.body;
-
-    console.log(webhookData);
 
     const sanityProduct: SanityProduct = {
       _type: "product",
