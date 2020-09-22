@@ -15,7 +15,7 @@ export const client = sanityClient({
 //https://shopify.dev/tutorials/manage-webhooks#verify-webhook
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
 
   new ShopifySyncClass(req, res).init();
 };
@@ -34,7 +34,7 @@ class ShopifySyncClass {
    */
 
   init() {
-    console.log(this.req.body);
+    // console.log(this.req.body);
     this.res.json({});
 
     // this.validateRequest();
