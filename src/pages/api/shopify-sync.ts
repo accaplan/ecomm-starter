@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import sanityClient from "@sanity/client";
-import { Product } from "@tylermcrobert/shopify-react";
+// import { Product } from "@tylermcrobert/shopify-react";
 import { clientOptions } from "lib/sanity";
 import { NextApiRequest, NextApiResponse } from "next";
 import { SanityProduct, ShopifyWebhookRes } from "types";
