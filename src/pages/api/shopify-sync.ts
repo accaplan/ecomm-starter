@@ -15,8 +15,6 @@ export const client = sanityClient({
 //https://shopify.dev/tutorials/manage-webhooks#verify-webhook
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(JSON.stringify(req.body));
-
   new ShopifySyncClass(req, res).init();
 };
 
@@ -34,11 +32,8 @@ class ShopifySyncClass {
    */
 
   init() {
-    // console.log(this.req.body);
-    this.res.json({});
-
-    // this.validateRequest();
-    // this.doSanityTransaction();
+    this.validateRequest();
+    this.doSanityTransaction();
   }
 
   /**
@@ -129,6 +124,8 @@ class ShopifySyncClass {
       const isTopLevelChange =
         existingSanityProduct.title !== webhookData.title ||
         existingSanityProduct.slug.current !== webhookData.handle;
+
+      console.log("asdf");
 
       if (isTopLevelChange) {
         this.updateEverything();
