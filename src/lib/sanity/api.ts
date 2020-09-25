@@ -21,10 +21,8 @@ export const fetchProduct = (
   slug: string,
   isPreview: boolean = false
 ): Promise<ProductSchema> => {
-  return getClient(isPreview).fetch(
-    `*[_type == 'product' && slug.current == $slug]`,
-    {
-      slug: "airsign-vacuum-test",
-    }
+  return fetchQuery(
+    `*[_type == 'product' && slug.current == '${slug}']`,
+    isPreview
   );
 };
