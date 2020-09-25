@@ -19,9 +19,9 @@ const PDP: NextPage<{ product: Product; cmsProduct: ProductSchema }> = ({
   }
   return (
     <Layout>
-      {/* <ProductProvider product={product}> */}
-      {/* <ProductHead /> */}
-      {/* </ProductProvider> */}
+      <ProductProvider product={product}>
+        <ProductHead />
+      </ProductProvider>
     </Layout>
   );
 };
