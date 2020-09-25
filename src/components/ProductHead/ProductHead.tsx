@@ -1,18 +1,23 @@
 import { useProduct } from "@tylermcrobert/shopify-react";
 import { QtySelect } from "components";
+import { useSanityProduct } from "pages/products/[handle]";
 import React from "react";
 import S from "./ProductHead.Styled";
 
 const ProductHead = () => {
-  const { product, productState, setQuantity } = useProduct();
+  const { productState, setQuantity } = useProduct();
+  const sanityProduct = useSanityProduct();
 
   return (
     <S.ProductHead>
       <div>
-        <img src={productState.currentVariant.image?.src} alt={product.title} />
+        <img
+          src={productState.currentVariant.image?.src}
+          alt={sanityProduct.title}
+        />
       </div>
       <div>
-        <h1>{product.title}</h1>
+        <h1>{sanityProduct.title}</h1>
         <div>${productState.currentVariant.price}</div>
         <ProductOptions />
         <QtySelect
@@ -20,25 +25,26 @@ const ProductHead = () => {
           value={productState.quantity}
         />
         <S.AddToCart unavailable={!productState.currentVariant.available} />
-        {product.descriptionHtml && (
-          <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
-        )}
       </div>
     </S.ProductHead>
   );
 };
 
+/**
+ * Product option variant selector
+ */
 const ProductOptions = () => {
-  const { product, productState, setOptions } = useProduct();
+  const { productState, setOptions } = useProduct();
+  const sanityProduct = useSanityProduct();
 
   const hasOptions =
-    product.options.filter((item) => item.values.length > 1).length > 0;
+    sanityProduct.options.filter((item) => item.values.length > 1).length > 0;
 
   if (!hasOptions) return null;
 
   return (
     <S.ProductOptions>
-      {product.options.map(({ name, values }) => {
+      {sanityProduct.options.map(({ name, values }) => {
         const isSelected = (optionName: string, optionValue: string) =>
           productState.currentVariant.selectedOptions.filter(
             (option) => option.name === optionName
@@ -48,7 +54,8 @@ const ProductOptions = () => {
           <React.Fragment key={name}>
             {name !== "Title" && <div>{name}</div>}
             <ul>
-              {values.map(({ value }) => {
+              {values.map((val) => {
+                const value = val.title;
                 const selected = isSelected(name, value);
                 return (
                   value !== "Default Title" && (

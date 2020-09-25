@@ -18,19 +18,19 @@ export type ProductSchema = {
     image: SanityImage;
     title: string;
   }[];
-  options?: SanityProductOption[];
+  options: SanityProductOption[];
 } & SanityDocument;
 
 export type SanityProductOption = {
   _key: string;
   _type: "option";
   name: string;
-  values?: SanityProductOptionValue[];
+  values: SanityProductOptionValue[];
 };
 
 export type SanityProductOptionValue = {
   _key: string;
   _type: "value";
   optionColors?: SanityColor;
-  title?: string;
+  title: string;
 };

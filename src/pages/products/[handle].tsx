@@ -1,3 +1,4 @@
+import { createContext, useContext } from "react";
 import { Product, ProductProvider } from "@tylermcrobert/shopify-react";
 import { Layout } from "components";
 import ProductHead from "components/ProductHead/ProductHead";
@@ -7,6 +8,12 @@ import { client } from "pages/_app";
 import React from "react";
 import { ProductSchema } from "types";
 import Error from "next/error";
+
+const SanityProductContext = createContext<ProductSchema>(
+  (null as unknown) as ProductSchema
+);
+
+export const useSanityProduct = () => useContext(SanityProductContext);
 
 const PDP: NextPage<{ product: Product; cmsProduct: ProductSchema }> = ({
   product,
@@ -19,9 +26,11 @@ const PDP: NextPage<{ product: Product; cmsProduct: ProductSchema }> = ({
   }
   return (
     <Layout>
-      <ProductProvider product={product}>
-        <ProductHead />
-      </ProductProvider>
+      <SanityProductContext.Provider value={cmsProduct}>
+        <ProductProvider product={product}>
+          <ProductHead />
+        </ProductProvider>
+      </SanityProductContext.Provider>
     </Layout>
   );
 };
