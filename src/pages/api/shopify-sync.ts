@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import sanityClient from "@sanity/client";
 import { ProductSchema, SanityProductOption, ShopifyWebhookRes } from "types";
 import "node-fetch";
+import { clientOptions } from "lib/sanity";
 
 const options = {
-  dataset: "production",
-  projectId: "jqru9bgs",
-  token: process.env.SANITY_TOKEN,
+  ...clientOptions,
+  token: process.env.SANITY_WRITE_TOKEN,
   useCdn: false,
 };
 
