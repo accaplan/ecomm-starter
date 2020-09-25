@@ -1,23 +1,24 @@
-import { useProduct } from "@tylermcrobert/shopify-react";
+import { useProduct, parseProductVariant } from "@tylermcrobert/shopify-react";
 import { QtySelect } from "components";
-import { useSanityProduct } from "pages/products/[handle]";
+import { urlFor } from "lib/sanity";
+import { useSanityProduct } from "providers";
 import React from "react";
 import S from "./ProductHead.Styled";
 
 const ProductHead = () => {
   const { productState, setQuantity } = useProduct();
-  const sanityProduct = useSanityProduct();
+  const { currentVariant, cmsProduct } = useSanityProduct();
 
   return (
     <S.ProductHead>
       <div>
         <img
-          src={productState.currentVariant.image?.src}
-          alt={sanityProduct.title}
+          src={urlFor(currentVariant.image).url() || ""}
+          alt={cmsProduct.title}
         />
       </div>
       <div>
-        <h1>{sanityProduct.title}</h1>
+        <h1>{cmsProduct.title}</h1>
         <div>${productState.currentVariant.price}</div>
         <ProductOptions />
         <QtySelect
@@ -35,16 +36,16 @@ const ProductHead = () => {
  */
 const ProductOptions = () => {
   const { productState, setOptions } = useProduct();
-  const sanityProduct = useSanityProduct();
+  const { cmsProduct } = useSanityProduct();
 
   const hasOptions =
-    sanityProduct.options.filter((item) => item.values.length > 1).length > 0;
+    cmsProduct.options.filter((item) => item.values.length > 1).length > 0;
 
   if (!hasOptions) return null;
 
   return (
     <S.ProductOptions>
-      {sanityProduct.options.map(({ name, values }) => {
+      {cmsProduct.options.map(({ name, values }) => {
         const isSelected = (optionName: string, optionValue: string) =>
           productState.currentVariant.selectedOptions.filter(
             (option) => option.name === optionName

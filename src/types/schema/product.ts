@@ -12,14 +12,16 @@ export type ProductSchema = {
       title: string;
     }
   ];
-  variants?: {
-    _key: string;
-    id: string;
-    image: SanityImage;
-    title: string;
-  }[];
+  variants: SanityProductVariant[];
   options: SanityProductOption[];
 } & SanityDocument;
+
+export type SanityProductVariant = {
+  _key: string;
+  id: string;
+  image: SanityImage;
+  title: string;
+};
 
 export type SanityProductOption = {
   _key: string;

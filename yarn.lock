@@ -1150,10 +1150,10 @@
   resolved "https://registry.yarnpkg.com/@tylermcrobert/modularscale/-/modularscale-1.1.0.tgz#f57b3e440301e3f94cf026db8b0ddf41c5a09857"
   integrity sha512-nwRa9fjwfv429hJlGczBNDANgCFnctVH6RFNRc/OkYPIvfUW6KocnUeVoJ/WYBbH26P7sAGAit/J7ZwSZAnsBw==
 
-"@tylermcrobert/shopify-react@^0.3.7":
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/@tylermcrobert/shopify-react/-/shopify-react-0.3.7.tgz#f83f55cb7225a44ce7ed7de4424ccbeda42f69f1"
-  integrity sha512-FLyP7yz4i5mnAWocZabBGWzsZJanDV5uxp8EHDCDxH+FlTQjAirydF79uurlPZxFpCLFTQho1kf5RRwcbRIW8A==
+"@tylermcrobert/shopify-react@^0.3.13":
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/@tylermcrobert/shopify-react/-/shopify-react-0.3.13.tgz#d47a702c033cb6c8e1307488d711ee49bc7ae98a"
+  integrity sha512-xVK0PNVV612uv0WafhkTLbOKb9BHXpa6ZAN7c+dkHvix45p0scP7jZAqyNk+v9T8v5XMNEapRk0JJvhFovnPwA==
   dependencies:
     reinspect "^1.1.0"
     shopify-buy "^2.11.0"
