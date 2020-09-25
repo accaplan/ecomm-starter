@@ -27,12 +27,12 @@ export const ProductProvider: React.FC<{
 }> = ({ children, product, cmsProduct }) => {
   return (
     <PackageProductProvider product={product}>
-      <Idk cmsProduct={cmsProduct}>{children}</Idk>
+      <SanityHandler cmsProduct={cmsProduct}>{children}</SanityHandler>
     </PackageProductProvider>
   );
 };
 
-const Idk: React.FC<{ cmsProduct: ProductSchema }> = ({
+const SanityHandler: React.FC<{ cmsProduct: ProductSchema }> = ({
   children,
   cmsProduct,
 }) => {
