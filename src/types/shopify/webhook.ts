@@ -23,7 +23,7 @@ type ShopifyWebhookOption = {
   product_id: number;
   name: string;
   position: string;
-  values: unknown[];
+  values: string[];
 };
 
 type ShopifyWebhookVariant = {

@@ -1,222 +1,159 @@
-/* eslint-disable no-console */
-import sanityClient from "@sanity/client";
-// import { Product } from "@tylermcrobert/shopify-react";
-import { clientOptions } from "lib/sanity";
 import { NextApiRequest, NextApiResponse } from "next";
-import { SanityProduct, ShopifyWebhookRes } from "types";
+import sanityClient from "@sanity/client";
+import { ProductSchema, SanityProductOption, ShopifyWebhookRes } from "types";
+import "node-fetch";
 
-export const client = sanityClient({
-  ...clientOptions,
-  useCdn: false,
+const options = {
+  dataset: "production",
+  projectId: "jqru9bgs",
   token: process.env.SANITY_TOKEN,
-});
-
-// TODO: verify webhook
-//https://shopify.dev/tutorials/manage-webhooks#verify-webhook
-
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  new ShopifySyncClass(req, res).init();
+  useCdn: false,
 };
 
-class ShopifySyncClass {
-  req: NextApiRequest;
-  res: NextApiResponse;
+const sendToSlack = async (text: string) =>
+  fetch(process.env.SLACK_WEBHOOK_URL as string, {
+    method: "POST",
+    body: JSON.stringify({
+      text: `\`${new Date().toUTCString()} — ${text}\``,
+    }),
+  }).then((res) => {
+    if (!res.toString) {
+      console.error(res);
+    }
+  });
 
-  constructor(req: NextApiRequest, res: NextApiResponse) {
-    this.req = req;
-    this.res = res;
-  }
+const client = sanityClient(options);
 
-  /**
-   * Initialize
-   */
+/**
+ * Taken from iamkenvingreen's github gist
+ * https://gist.github.com/iamkevingreen/3872f5acbaf5b100a8ebc02e4d95a03e
+ */
 
-  init() {
-    this.validateRequest();
-    this.doSanityTransaction();
-  }
-
-  /**
-   * Standardizes error responses
-   * @param code Status code
-   * @param message Error message in your own words
-   * @param err Error object
-   */
-
-  setErr = (code: number, message: string, err: any | null) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const setError = (code: number, message: string, error?: any) => {
+    const err = `ERROR ${code}: ${message}`;
     console.error(err);
-    this.res.status(code).json({ error: true, message: message });
+    sendToSlack(err);
+    if (error) {
+      console.error(error);
+    }
+    res.status(code).json({
+      error: true,
+      statusCode: error?.statusCode || code,
+      message,
+    });
     return null;
   };
 
   /**
-   * Check for correct method
+   * Validate
    */
-  validateRequest() {
-    if (this.req.method !== "POST" || !this.req.body) {
-      this.setErr(400, "Method must be POST and have body", null);
-    }
-  }
+
+  if (req.method !== "POST") setError(400, "Must be POST method");
+  if (!req.body) setError(400, "Must include body");
 
   /**
-   * Format for Sanity
+   * Extract data from body payload
    */
-  getFormattedData() {
-    const webhookData: ShopifyWebhookRes = this.req.body;
 
-    const sanityProduct: SanityProduct = {
-      _type: "product",
-      _id: webhookData.id.toString(),
-      slug: { current: webhookData.handle },
-      title: webhookData.title,
-      shopify: {
-        productId: webhookData.id,
-        title: webhookData.title,
-        defaultPrice: webhookData.variants[0].price,
-        defaultVariant: {
-          title: webhookData.variants[0].title,
-          price: webhookData.variants[0].price,
-          sku: webhookData.variants[0].sku,
-          variantId: webhookData.variants[0].id,
-          taxable: webhookData.variants[0].taxable,
-          inventoryQuantity: webhookData.variants[0].inventory_quantity,
-          inventoryPolicy: webhookData.variants[0].inventory_policy,
-          barcode: webhookData.variants[0].barcode,
-        },
-      },
-    };
+  const data = req.body as ShopifyWebhookRes;
 
-    const productVariants = webhookData.variants.map((variant) => ({
-      _type: "productVariant",
-      _id: variant.id.toString(),
-      title: webhookData.title,
-      shopify: {
-        productId: webhookData.id,
-        variantId: variant.id,
-        title: webhookData.title,
-        variantTitle: variant.title,
-        sku: variant.sku,
-        price: variant.price,
-      },
-    }));
+  const incomingOptions: SanityProductOption[] = data.options.map((item) => ({
+    _key: item.id.toString(),
+    _type: "option",
+    name: item.name,
+    values: item.values.map((value) => ({
+      _key: value,
+      _type: "value",
+      title: value,
+    })),
+  }));
+
+  const incomingVariants = data.variants.map((variant) => ({
+    id: variant.id.toString(),
+    title: variant.title,
+    _key: variant.id.toString(),
+  }));
+
+  /**
+   * Fetch existing product & make sure it isn't a draft
+   */
+
+  const existingSanityProducts: ProductSchema[] | null =
+    (await client.fetch(`*[_type == "product" && slug.current == $slug]`, {
+      slug: data.handle.toString(),
+    })) || null;
+
+  if ((existingSanityProducts && existingSanityProducts.length > 1) || false) {
+    setError(
+      503,
+      `Sanity document ${data.title} is a draft. Publish the document to update with sync.`
+    );
+    return null;
+  }
+
+  const existingSanityProduct =
+    (existingSanityProducts && existingSanityProducts[0]) || null;
+
+  /**
+   * Merge variants and Options
+   */
+
+  const mergedVariants = incomingVariants.map((newVariant) => ({
+    ...newVariant,
+    ...existingSanityProduct?.variants?.find(
+      (oldVariant) => oldVariant.id === newVariant.id
+    ),
+  }));
+
+  const mergedOptions = incomingOptions.map((incomingOption) => {
+    /** Get data from existing option */
+    const existingOption = existingSanityProduct?.options?.find(
+      (existingOption) => existingOption.name === incomingOption.name
+    );
 
     return {
-      sanityProduct,
-      productVariants,
-      webhookData,
+      /** add option from webhook*/
+      ...incomingOption,
+      /** overwrite webhook option with cms option if it exists */
+      ...existingOption,
+      /** Update values by deep-merging */
+      values: incomingOption.values?.map((incomingVal) => ({
+        /** Add value from webhook */
+        ...incomingVal,
+        /** Overwrite if already exists in CMS */
+        ...existingOption?.values?.find((val) => val._key === incomingVal._key),
+        _key: incomingVal.title,
+      })),
     };
-  }
+  });
 
   /**
-   * Merge data into sanity
+   * New Product
    */
 
-  async doSanityTransaction() {
-    const { webhookData } = this.getFormattedData();
+  const product = {
+    _type: "product",
+    _id: data.id.toString(),
+    title: data.title,
+    slug: {
+      _type: "slug",
+      current: data.handle,
+    },
+    variants: mergedVariants,
+    options: mergedOptions,
+  };
 
-    const existingSanityProduct: SanityProduct = await client.fetch(
-      `*[_type == "product" && _id == $id][0]`,
-      { id: webhookData.id.toString() }
-    );
-
-    if (!!existingSanityProduct) {
-      // Check if product updates have happened that matter
-      const isTopLevelChange =
-        existingSanityProduct.title !== webhookData.title ||
-        existingSanityProduct.slug.current !== webhookData.handle;
-
-      console.log("asdf");
-
-      if (isTopLevelChange) {
-        this.updateEverything();
-      } else {
-        this.partialUpdate(existingSanityProduct, webhookData);
-      }
-    } else {
-      this.updateEverything();
-    }
-  }
-
-  /**
-   * Perform complete update
-   */
-
-  async updateEverything() {
-    const {
-      sanityProduct,
-      productVariants,
-      webhookData,
-    } = this.getFormattedData();
-
-    let tx = client.transaction();
-
-    /**
-     * Update product
-     */
-
-    try {
-      tx = tx.createIfNotExists(sanityProduct);
-      tx = tx.patch(sanityProduct._id.toString(), (patch) =>
-        patch.set(sanityProduct)
-      );
-
-      console.log(
-        `Successfully updated/patched Product ${sanityProduct._id} in Sanity`
-      );
-    } catch (err) {
-      this.setErr(400, "Could not create new product", err);
-    }
-
-    /**
-     * Update variants
-     */
-
-    try {
-      productVariants.forEach((variant) => {
-        tx = tx.createIfNotExists(variant);
-        tx = tx.patch(variant._id, (p) => p.set(variant));
-      });
-    } catch (err) {
-      this.setErr(400, "Could not create new variants", err);
-    }
-
-    console.log(
-      `Updating/patching Variants ${webhookData.variants
-        .map((v) => v.id)
-        .join(", ")} in Sanity`
-    );
-
-    /**
-     * Include variants on product document
-     */
-
-    tx = tx.patch(webhookData.id.toString(), (p) =>
-      p.set({
-        "shopify.variants": webhookData.variants.map((variant) => ({
-          _type: "reference",
-          _ref: variant.id.toString(),
-          _key: variant.id.toString(),
-        })),
-      })
-    );
-
-    /**
-     * Commit
-     */
-
-    const result = await tx.commit();
-    this.res.json({ result });
-  }
-
-  /**
-   * Selectively update
-   */
-
-  partialUpdate(
-    existingSanityProduct: SanityProduct,
-    webhookData: ShopifyWebhookRes
-  ) {
-    // console.log(existingSanityProduct, webhookData);
-    this.res.json({ msg: "partial update" });
-  }
-}
+  return client
+    .transaction()
+    .createIfNotExists(product)
+    .patch(data.id.toString(), (patch) => patch.set(product))
+    .commit()
+    .then((resp) => {
+      sendToSlack(`Successfully pushed ${data.title} to Sanity`);
+      res.status(200).json(resp);
+    })
+    .catch((err) => {
+      setError(400, "Error pushing to Sanity", err);
+    });
+};

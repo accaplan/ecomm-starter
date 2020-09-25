@@ -1,72 +1,50 @@
+import { MdShoppingCart } from "react-icons/lib/md";
+
+const SHOPIFY_MOD_MSG = "From Shopify and cannot be modified here";
+
 export default {
-  type: "document",
   name: "product",
+  title: "Shopify Product",
+  type: "document",
+  icon: MdShoppingCart,
+
   fields: [
     {
+      title: "Title",
       name: "title",
       type: "string",
-      description: "This is from Shopify and must be modified there",
+      description: SHOPIFY_MOD_MSG,
       readOnly: true,
     },
-
     {
+      title: "Slug",
       name: "slug",
       type: "slug",
+      description: SHOPIFY_MOD_MSG,
       readOnly: true,
-      description: "This is from Shopify and must be modified there",
     },
-
     {
-      name: "shopify",
-      type: "object",
-      fields: [
+      name: "image",
+      type: "image",
+      description: "Main image of product",
+      validation: (Rule) => Rule.required(),
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: "variants",
+      title: "Variant Images",
+      description:
+        "Add images for Shopify variants. This list is auto-populated by Shopify.",
+      type: "array",
+      of: [
         {
-          name: "productId",
-          type: "number",
-          readOnly: true,
-        },
-        {
-          name: "title",
-          type: "string",
-          readOnly: true,
-        },
-        {
-          name: "defaultPrice",
-          type: "string",
-          readOnly: true,
-        },
-        {
-          name: "defaultVariant",
           type: "object",
           fields: [
             {
-              name: "barcode",
+              name: "id",
               type: "string",
-              readOnly: true,
-            },
-            {
-              name: "inventoryPolicy",
-              type: "string",
-              readOnly: true,
-            },
-            {
-              name: "inventoryQuantity",
-              type: "number",
-              readOnly: true,
-            },
-            {
-              name: "price",
-              type: "string",
-              readOnly: true,
-            },
-            {
-              name: "sku",
-              type: "string",
-              readOnly: true,
-            },
-            {
-              name: "taxable",
-              type: "boolean",
               readOnly: true,
             },
             {
@@ -75,20 +53,49 @@ export default {
               readOnly: true,
             },
             {
-              name: "variantId",
-              type: "number",
-              readOnly: true,
+              name: "image",
+              type: "image",
+              options: {
+                hotspot: true,
+              },
             },
           ],
         },
+      ],
+    },
+    {
+      name: "options",
+      type: "array",
+      of: [
         {
-          name: "variants",
-          type: "array",
-          readOnly: true,
-          of: [
+          type: "object",
+          name: "option",
+          fields: [
             {
-              type: "reference",
-              to: { type: "productVariant" },
+              name: "name",
+              type: "string",
+            },
+            {
+              name: "values",
+              type: "array",
+              of: [
+                {
+                  name: "value",
+                  type: "object",
+                  fields: [
+                    {
+                      name: "title",
+                      type: "string",
+                    },
+
+                    {
+                      title: "Color Value",
+                      type: "color",
+                      name: "optionColors",
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
