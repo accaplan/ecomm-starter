@@ -4,6 +4,11 @@ import { ProductSchema, SanityProductOption, ShopifyWebhookRes } from "types";
 import "node-fetch";
 import { clientOptions } from "lib/sanity";
 
+/**
+ * TODO: Add "Delete" functionality
+ * TODO: Add verification code from Shoipify
+ */
+
 const options = {
   ...clientOptions,
   token: process.env.SANITY_WRITE_TOKEN,
