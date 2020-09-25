@@ -38,6 +38,9 @@ export default {
       description:
         "Add images for Shopify variants. This list is auto-populated by Shopify.",
       type: "array",
+      options: {
+        sortable: false,
+      },
       of: [
         {
           type: "object",
@@ -66,6 +69,9 @@ export default {
     {
       name: "options",
       type: "array",
+      options: {
+        sortable: false,
+      },
       of: [
         {
           type: "object",
