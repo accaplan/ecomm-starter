@@ -1,4 +1,3 @@
-import { createContext, useContext } from "react";
 import { Product } from "@tylermcrobert/shopify-react";
 import { Layout } from "components";
 import ProductHead from "components/ProductHead/ProductHead";

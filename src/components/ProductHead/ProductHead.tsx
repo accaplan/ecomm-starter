@@ -1,4 +1,3 @@
-import { useProduct, parseProductVariant } from "@tylermcrobert/shopify-react";
 import { QtySelect } from "components";
 import { urlFor } from "lib/sanity";
 import { useSanityProduct } from "providers";
