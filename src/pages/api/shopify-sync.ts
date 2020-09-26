@@ -6,7 +6,8 @@ import { clientOptions } from "lib/sanity";
 
 /**
  * TODO: Add "Delete" functionality
- * TODO: Add verification code from Shoipify
+ * TODO: Add verification code from Shopify
+ * TODO: Add imagery for product from Shopify
  */
 
 const options = {
