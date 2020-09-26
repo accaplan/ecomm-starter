@@ -33,77 +33,98 @@ export default {
       },
     },
     {
-      name: "variants",
-      title: "Variant Images",
-      description:
-        "Add images for Shopify variants. This list is auto-populated by Shopify.",
-      type: "array",
-      options: {
-        sortable: false,
-      },
-      of: [
+      name: "shopify",
+      type: "object",
+      fields: [
         {
-          type: "object",
-          fields: [
+          name: "variants",
+          title: "Variant Images",
+          description:
+            "Add images for Shopify variants. This list is auto-populated by Shopify.",
+          type: "array",
+          options: {
+            sortable: false,
+          },
+          of: [
             {
-              name: "id",
-              type: "string",
-              readOnly: true,
-            },
-            {
-              name: "title",
-              type: "string",
-              readOnly: true,
-            },
-            {
-              name: "image",
-              type: "image",
-              options: {
-                hotspot: true,
-              },
+              type: "object",
+              fields: [
+                {
+                  name: "id",
+                  type: "string",
+                  readOnly: true,
+                },
+                {
+                  name: "title",
+                  type: "string",
+                  readOnly: true,
+                },
+                {
+                  name: "image",
+                  type: "image",
+                  options: {
+                    hotspot: true,
+                  },
+                },
+              ],
             },
           ],
         },
-      ],
-    },
-    {
-      name: "options",
-      type: "array",
-      options: {
-        sortable: false,
-      },
-      of: [
         {
-          type: "object",
-          name: "option",
-          fields: [
+          name: "options",
+          type: "array",
+          options: {
+            sortable: false,
+          },
+          of: [
             {
-              name: "name",
-              type: "string",
-            },
-            {
-              name: "values",
-              type: "array",
-              of: [
+              type: "object",
+              name: "option",
+              fields: [
                 {
-                  name: "value",
-                  type: "object",
-                  fields: [
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  name: "values",
+                  type: "array",
+                  of: [
                     {
-                      name: "title",
-                      type: "string",
-                    },
+                      name: "value",
+                      type: "object",
+                      fields: [
+                        {
+                          name: "title",
+                          type: "string",
+                        },
 
-                    {
-                      title: "Color Value",
-                      type: "color",
-                      name: "optionColors",
+                        {
+                          title: "Color Value",
+                          type: "color",
+                          name: "optionColors",
+                        },
+                      ],
                     },
                   ],
                 },
               ],
             },
           ],
+        },
+      ],
+    },
+    {
+      name: "data",
+      title: "Shopify Data",
+      type: "object",
+      readOnly: true,
+      options: {
+        collapsable: true,
+      },
+      fields: [
+        {
+          type: "string",
+          name: "price",
         },
       ],
     },

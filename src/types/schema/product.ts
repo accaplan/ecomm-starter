@@ -12,8 +12,13 @@ export type ProductSchema = {
       title: string;
     }
   ];
-  variants: SanityProductVariant[];
-  options: SanityProductOption[];
+  shopify: {
+    variants: SanityProductVariant[];
+    options: SanityProductOption[];
+  };
+  data: {
+    price: string;
+  };
 } & SanityDocument;
 
 export type SanityProductVariant = {

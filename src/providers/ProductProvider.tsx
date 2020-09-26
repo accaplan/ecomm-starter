@@ -40,7 +40,7 @@ const SanityHandler: React.FC<{ cmsProduct: ProductSchema }> = ({
   /**
    * Current CMS product variant
    */
-  const currentVariant = cmsProduct.variants.find(
+  const currentVariant = cmsProduct.shopify.variants.find(
     (variant) =>
       variant.id ===
       parseProductVariant(productCtx.productState.currentVariant.id).toString()

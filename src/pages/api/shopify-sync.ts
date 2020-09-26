@@ -98,7 +98,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const existingSanityProduct =
-    (existingSanityProducts && existingSanityProducts[0]) || null;
+    (existingSanityProducts && existingSanityProducts[0].shopify) || null;
 
   /**
    * Merge variants and Options
@@ -145,8 +145,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       _type: "slug",
       current: data.handle,
     },
-    variants: mergedVariants,
-    options: mergedOptions,
+    shopify: {
+      variants: mergedVariants,
+      options: mergedOptions,
+    },
+    data: {
+      price: data.variants[0].price,
+    },
   };
 
   return client
