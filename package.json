@@ -12,8 +12,6 @@
   "author": "Tyler McRobert",
   "license": "ISC",
   "dependencies": {
-    "@sanity/client": "^1.150.7",
-    "@sanity/image-url": "^0.140.19",
     "@tylermcrobert/modularscale": "^1.1.0",
     "@tylermcrobert/shopify-react": "^0.3.13",
     "dotenv": "^8.2.0",
