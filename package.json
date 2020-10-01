@@ -12,11 +12,10 @@
   "author": "Tyler McRobert",
   "license": "ISC",
   "dependencies": {
-    "@tylermcrobert/shopify-react": "^0.3.13",
     "dotenv": "^8.2.0",
-    "next": "^9.5.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "next": "^9.5.4-canary.23",
+    "react": "^17.0.0-rc.2",
+    "react-dom": "^17.0.0-rc.2",
     "styled-components": "^5.2.0",
     "styled-reset": "^4.2.3"
   },

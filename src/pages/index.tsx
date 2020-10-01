@@ -1,4 +1,4 @@
-const Index: React.FC<{}> = () => {
+const Index = () => {
   return <div>asdf</div>;
 };
 
