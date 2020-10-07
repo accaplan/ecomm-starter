@@ -3,7 +3,6 @@ import sanityClient from "@sanity/client";
 import { ProductSchema, SanityProductOption, ShopifyWebhookRes } from "types";
 import "node-fetch";
 import { clientOptions } from "lib/sanity";
-import { Product } from "@tylermcrobert/shopify-react";
 
 /**
  * TODO: Add "Delete" functionality
@@ -37,7 +36,6 @@ const client = sanityClient(options);
  */
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(JSON.stringify(req.body));
   const setError = (code: number, message: string, error?: any) => {
     const err = `ERROR ${code}: ${message}`;
     console.error(err);
