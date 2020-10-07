@@ -8,13 +8,8 @@ import S from "./ProductHead.Styled";
 const ProductHead = () => {
   const { cmsProduct, productState, setQuantity } = useProduct();
 
-  // const data = JSON.parse(productState.currentVariant.data);
-  // const isAvailable =
-  //   !!data.inventory_quantity || data.inventory_policy !== "deny";
   // console.log(
-  //   cmsProduct.options.variants.map(
-  //     (variant) => JSON.parse(variant.data).inventory_quantity
-  //   )
+  //   cmsProduct.options.variants.map((variant) => variant.isAvailable)
   // );
 
   return (
@@ -33,7 +28,7 @@ const ProductHead = () => {
           onUpdate={(num) => setQuantity(num)}
           value={productState.quantity}
         />
-        {/* <S.AddToCart unavailable={!currentVariant.available} /> */}
+        {/* <S.AddToCart unavailable={!productState.currentVariant.isAvailable} /> */}
       </div>
     </S.ProductHead>
   );

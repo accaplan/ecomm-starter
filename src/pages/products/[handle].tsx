@@ -20,7 +20,7 @@ const PDP: NextPage<{ product: Product; cmsProduct: ProductSchema }> = ({
   }
   return (
     <Layout>
-      <ProductProvider cmsProduct={cmsProduct} product={product}>
+      <ProductProvider cmsProduct={cmsProduct}>
         <ProductHead />
       </ProductProvider>
     </Layout>
