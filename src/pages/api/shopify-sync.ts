@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import sanityClient from "@sanity/client";
-import { ProductSchema, SanityProductOption, ShopifyWebhookRes } from "types";
+import { ProductSchema, ShopifyWebhookRes } from "types";
 import "node-fetch";
 import { clientOptions } from "lib/sanity";
+import { ProductSchemaOptionCategory } from "@tylermcrobert/sanity-schemas";
 
 /**
  * TODO: Add "Delete" functionality
@@ -65,16 +66,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const data = req.body as ShopifyWebhookRes;
 
-    const incomingOptions: SanityProductOption[] = data.options.map((item) => ({
-      _key: item.id.toString(),
-      _type: "option",
-      name: item.name,
-      values: item.values.map((value) => ({
-        _key: value,
-        _type: "value",
-        title: value,
-      })),
-    }));
+    const incomingOptions: ProductSchemaOptionCategory[] = data.options.map(
+      (item) => ({
+        _key: item.id.toString(),
+        _type: "option",
+        name: item.name,
+        values: item.values.map((value) => ({
+          _key: value,
+          _type: "value",
+          title: value,
+        })),
+      })
+    );
 
     const incomingVariants = data.variants.map((variant) => ({
       id: variant.id.toString(),

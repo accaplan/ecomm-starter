@@ -15,7 +15,6 @@
     "@sanity/client": "^1.150.7",
     "@sanity/image-url": "^0.140.19",
     "@tylermcrobert/modularscale": "^1.1.0",
-    "@tylermcrobert/sanity-schemas": "^0.1.0",
     "@tylermcrobert/shopify-react": "^0.3.13",
     "dotenv": "^8.2.0",
     "next": "^9.5.3",
@@ -25,6 +24,7 @@
     "styled-reset": "^4.2.3"
   },
   "devDependencies": {
+    "@tylermcrobert/sanity-schemas": "^0.1.0",
     "@types/node": "^14.10.1",
     "@types/react": "^16.9.49",
     "@types/styled-components": "^5.1.3",

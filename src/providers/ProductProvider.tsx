@@ -1,3 +1,4 @@
+import { ProductSchemaVariant } from "@tylermcrobert/sanity-schemas";
 import {
   parseProductVariant,
   Product,
@@ -6,7 +7,7 @@ import {
   useProduct as usePackageProduct,
 } from "@tylermcrobert/shopify-react";
 import React, { createContext, useContext } from "react";
-import { ProductSchema, SanityProductVariant } from "types";
+import { ProductSchema } from "types";
 
 /**
  * TODO: Remove all of this and just have it be one
@@ -15,11 +16,11 @@ import { ProductSchema, SanityProductVariant } from "types";
 const SanityProductContext = createContext<
   {
     cmsProduct: ProductSchema;
-    currentVariant: SanityProductVariant;
+    currentVariant: ProductSchemaVariant;
   } & ProductCtxType
 >({
   cmsProduct: (null as unknown) as ProductSchema,
-  currentVariant: (null as unknown) as SanityProductVariant,
+  currentVariant: (null as unknown) as ProductSchemaVariant,
   ...({} as ProductCtxType),
 });
 
@@ -48,7 +49,7 @@ const SanityHandler: React.FC<{ cmsProduct: ProductSchema }> = ({
     (variant) =>
       variant.id ===
       parseProductVariant(productCtx.productState.currentVariant.id).toString()
-  ) as SanityProductVariant;
+  ) as ProductSchemaVariant;
 
   return (
     <SanityProductContext.Provider

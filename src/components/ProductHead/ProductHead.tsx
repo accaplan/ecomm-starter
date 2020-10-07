@@ -1,8 +1,8 @@
+import { ProductSchemaOptionCategoryValue } from "@tylermcrobert/sanity-schemas";
 import { QtySelect } from "components";
 import { urlFor } from "lib/sanity";
 import { useSanityProduct } from "providers";
 import React from "react";
-import { SanityProductOptionValue } from "types";
 import S from "./ProductHead.Styled";
 
 const ProductHead = () => {
@@ -52,7 +52,7 @@ const ProductOptions = () => {
 };
 
 const Option: React.FC<{
-  values: SanityProductOptionValue[];
+  values: ProductSchemaOptionCategoryValue[];
   name: string;
 }> = ({ values, name }) => {
   const { productState, setOptions } = useSanityProduct();
