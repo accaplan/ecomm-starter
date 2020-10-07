@@ -4,17 +4,9 @@ import { SanitySlug, SanityImage, SanityColor } from "types";
 export type ProductSchema = {
   title: string;
   slug: SanitySlug;
-  colors?: [
-    {
-      _key: string;
-      _type: string;
-      optionColors: SanityColor;
-      title: string;
-    }
-  ];
-  shopify: {
+  options: {
     variants: SanityProductVariant[];
-    options: SanityProductOption[];
+    categories: SanityProductOption[];
   };
   data: {
     price: string;
