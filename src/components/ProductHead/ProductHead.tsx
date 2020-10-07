@@ -1,20 +1,28 @@
-import { useProduct } from "@tylermcrobert/shopify-react";
 import { QtySelect } from "components";
+import { urlFor } from "lib/sanity";
+import { useSanityProduct } from "providers";
 import React from "react";
+import { SanityProductOptionValue } from "types";
 import S from "./ProductHead.Styled";
 
 const ProductHead = () => {
-  const { product, productState, setQuantity } = useProduct();
+  const {
+    currentVariant,
+    cmsProduct,
+    productState,
+    setQuantity,
+  } = useSanityProduct();
 
   return (
     <S.ProductHead>
       <div>
-        {product.images?.map((img) => (
-          <img src={img?.src} alt="" key={img?.src} />
-        ))}
+        <img
+          src={urlFor(currentVariant.image).url() || ""}
+          alt={cmsProduct.title}
+        />
       </div>
       <div>
-        <h1>{product.title}</h1>
+        <h1>{cmsProduct.title}</h1>
         <div>${productState.currentVariant.price}</div>
         <ProductOptions />
         <QtySelect
@@ -31,33 +39,28 @@ const ProductHead = () => {
  * Product option variant selector
  */
 const ProductOptions = () => {
-  const { product } = useProduct();
+  const { cmsProduct } = useSanityProduct();
 
   const hasOptions =
-    product.options.filter((item) => item.values.length > 1).length > 0;
+    cmsProduct.options.categories.filter((item) => item.values.length > 1)
+      .length > 0;
 
   if (!hasOptions) return null;
 
   return (
     <S.ProductOptions>
-      {product.options.map(({ name, values }) => {
-        return (
-          <Option
-            values={values.map((val) => val.value)}
-            key={name}
-            name={name}
-          />
-        );
+      {cmsProduct.options.categories.map(({ name, values }) => {
+        return <Option values={values} key={name} name={name} />;
       })}
     </S.ProductOptions>
   );
 };
 
 const Option: React.FC<{
-  values: string[];
+  values: SanityProductOptionValue[];
   name: string;
 }> = ({ values, name }) => {
-  const { productState, setOptions } = useProduct();
+  const { productState, setOptions } = useSanityProduct();
 
   const isSelected = (optionName: string, optionValue: string) =>
     productState.currentVariant.selectedOptions.filter(
@@ -68,7 +71,8 @@ const Option: React.FC<{
     <React.Fragment>
       {name !== "Title" && <div>{name}</div>}
       <ul>
-        {values.map((value) => {
+        {values.map((val) => {
+          const value = val.title;
           const selected = isSelected(name, value);
           return (
             value !== "Default Title" && (
