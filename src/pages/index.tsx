@@ -1,16 +1,20 @@
-import { Product, ProductProvider } from "@tylermcrobert/shopify-react";
-import ProductCard from "components/ProductCard/ProductCard";
+import { Product } from "@tylermcrobert/shopify-react";
 import { Layout, ProductGrid } from "../components";
 import { client } from "./_app";
+import { client as sanityClient } from "lib/sanity";
+import { ProductSchema } from "types";
 
-const Index: React.FC<{ products: Product[] }> = ({ products }) => {
+const Index: React.FC<{
+  products: Product[];
+  sanityProducts: ProductSchema[];
+}> = ({ sanityProducts }) => {
   return (
     <Layout>
       <ProductGrid>
-        {products.map((product) => (
-          <ProductProvider product={product} key={product.id}>
-            <ProductCard />
-          </ProductProvider>
+        {sanityProducts.map((product) => (
+          <div key={product._id}>
+            <pre>{JSON.stringify(product, null, 2)}</pre>
+          </div>
         ))}
       </ProductGrid>
     </Layout>
@@ -19,7 +23,9 @@ const Index: React.FC<{ products: Product[] }> = ({ products }) => {
 
 export const getStaticProps = async () => {
   const products = JSON.parse(JSON.stringify(await client.product.fetchAll()));
-  return { props: { products } };
+  const sanityProducts = await sanityClient.fetch(`*[_type == 'product']`);
+
+  return { props: { products, sanityProducts } };
 };
 
 export default Index;
