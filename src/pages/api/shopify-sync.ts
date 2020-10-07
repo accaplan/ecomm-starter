@@ -3,6 +3,7 @@ import sanityClient from "@sanity/client";
 import { ProductSchema, SanityProductOption, ShopifyWebhookRes } from "types";
 import "node-fetch";
 import { clientOptions } from "lib/sanity";
+import { Product } from "@tylermcrobert/shopify-react";
 
 /**
  * TODO: Add "Delete" functionality
@@ -152,9 +153,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         _type: "slug",
         current: data.handle,
       },
-      shopify: {
+      options: {
         variants: mergedVariants,
-        options: mergedOptions,
+        categories: mergedOptions,
       },
       data: {
         price: data.variants[0].price,
