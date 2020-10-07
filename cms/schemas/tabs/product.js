@@ -9,7 +9,7 @@ export default {
 
   fields: [
     ...ProductInfo,
-    { ...ProductConfigurations() },
+    ...ProductConfigurations(),
 
     {
       name: "data",
