@@ -83,6 +83,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       id: variant.id.toString(),
       title: variant.title,
       _key: variant.id.toString(),
+      price: variant.price,
+      compareAtPrice: variant.compare_at_price,
+      data: JSON.stringify(variant),
     }));
 
     /**
