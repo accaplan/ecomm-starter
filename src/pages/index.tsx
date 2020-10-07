@@ -1,7 +1,7 @@
 import { Product } from "@tylermcrobert/shopify-react";
 import { Layout, ProductGrid } from "../components";
 import { client } from "./_app";
-import { client as sanityClient } from "lib/sanity";
+import { client as sanityClient, urlFor } from "lib/sanity";
 import { ProductSchema } from "types";
 
 const Index: React.FC<{
@@ -12,9 +12,12 @@ const Index: React.FC<{
     <Layout>
       <ProductGrid>
         {sanityProducts.map((product) => (
-          <div key={product._id}>
-            <pre>{JSON.stringify(product, null, 2)}</pre>
-          </div>
+          <a href={`/products/${product.slug.current}`} key={product._id}>
+            <div>
+              <img src={urlFor(product.image).url() || ""} />
+              <h2>{product.title}</h2>
+            </div>
+          </a>
         ))}
       </ProductGrid>
     </Layout>

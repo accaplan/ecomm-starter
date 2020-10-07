@@ -6,18 +6,13 @@ import { SanityProductOptionValue } from "types";
 import S from "./ProductHead.Styled";
 
 const ProductHead = () => {
-  const {
-    currentVariant,
-    cmsProduct,
-    productState,
-    setQuantity,
-  } = useSanityProduct();
+  const { cmsProduct, productState, setQuantity } = useSanityProduct();
 
   return (
     <S.ProductHead>
       <div>
         <img
-          src={urlFor(currentVariant.image).url() || ""}
+          src={urlFor(cmsProduct.image).url() || ""}
           alt={cmsProduct.title}
         />
       </div>

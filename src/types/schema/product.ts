@@ -4,6 +4,7 @@ import { SanitySlug, SanityImage, SanityColor } from "types";
 export type ProductSchema = {
   title: string;
   slug: SanitySlug;
+  image: SanityImage;
   options: {
     variants: SanityProductVariant[];
     categories: SanityProductOption[];
