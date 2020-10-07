@@ -161,6 +161,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
       data: {
         price: data.variants[0].price,
+        dateCreated: data.created_at,
+        dateUpdated: data.updated_at,
+        vendor: data.vendor,
       },
     };
 
