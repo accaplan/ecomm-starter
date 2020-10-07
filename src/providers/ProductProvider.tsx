@@ -8,6 +8,10 @@ import {
 import React, { createContext, useContext } from "react";
 import { ProductSchema, SanityProductVariant } from "types";
 
+/**
+ * TODO: Remove all of this and just have it be one
+ */
+
 const SanityProductContext = createContext<
   {
     cmsProduct: ProductSchema;
