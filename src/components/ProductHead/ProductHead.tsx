@@ -1,12 +1,21 @@
 import { ProductSchemaOptionCategoryValue } from "@tylermcrobert/sanity-schemas";
 import { QtySelect } from "components";
 import { urlFor } from "lib/sanity";
-import { useSanityProduct } from "providers";
+import { useProduct } from "providers";
 import React from "react";
 import S from "./ProductHead.Styled";
 
 const ProductHead = () => {
-  const { cmsProduct, productState, setQuantity } = useSanityProduct();
+  const { cmsProduct, productState, setQuantity } = useProduct();
+
+  // const data = JSON.parse(productState.currentVariant.data);
+  // const isAvailable =
+  //   !!data.inventory_quantity || data.inventory_policy !== "deny";
+  // console.log(
+  //   cmsProduct.options.variants.map(
+  //     (variant) => JSON.parse(variant.data).inventory_quantity
+  //   )
+  // );
 
   return (
     <S.ProductHead>
@@ -24,7 +33,7 @@ const ProductHead = () => {
           onUpdate={(num) => setQuantity(num)}
           value={productState.quantity}
         />
-        <S.AddToCart unavailable={!productState.currentVariant.available} />
+        {/* <S.AddToCart unavailable={!currentVariant.available} /> */}
       </div>
     </S.ProductHead>
   );
@@ -34,7 +43,7 @@ const ProductHead = () => {
  * Product option variant selector
  */
 const ProductOptions = () => {
-  const { cmsProduct } = useSanityProduct();
+  const { cmsProduct } = useProduct();
 
   const hasOptions =
     cmsProduct.options.categories.filter((item) => item.values.length > 1)
@@ -54,67 +63,70 @@ const ProductOptions = () => {
 const Option: React.FC<{
   values: ProductSchemaOptionCategoryValue[];
   name: string;
-}> = ({ values, name }) => {
-  const { productState, setOptions } = useSanityProduct();
+}> = () =>
+  // { values, name }
+  {
+    return <div>option</div>;
+    // const { currentVariant, setOptions } = useProduct();
 
-  const isSelected = (optionName: string, optionValue: string) =>
-    productState.currentVariant.selectedOptions.filter(
-      (option) => option.name === optionName
-    )[0].value === optionValue;
+    // const isSelected = (optionName: string, optionValue: string) =>
+    //   productState.currentVariant.selectedOptions.filter(
+    //     (option) => option.name === optionName
+    //   )[0].value === optionValue;
 
-  return (
-    <React.Fragment>
-      {name !== "Title" && <div>{name}</div>}
-      <ul>
-        {values.map((val) => {
-          const value = val.title;
-          const selected = isSelected(name, value);
-          return (
-            value !== "Default Title" && (
-              <VariantSelect
-                key={value}
-                onChange={() => setOptions({ [name]: value })}
-                value={value}
-                selected={selected}
-                name={name}
-              />
-            )
-          );
-        })}
-      </ul>
-    </React.Fragment>
-  );
-};
+    // return (
+    //   <React.Fragment>
+    //     {name !== "Title" && <div>{name}</div>}
+    //     <ul>
+    //       {values.map((val) => {
+    //         const value = val.title;
+    //         const selected = isSelected(name, value);
+    //         return (
+    //           value !== "Default Title" && (
+    //             <VariantSelect
+    //               key={value}
+    //               onChange={() => setOptions({ [name]: value })}
+    //               value={value}
+    //               selected={selected}
+    //               name={name}
+    //             />
+    //           )
+    //         );
+    //       })}
+    //     </ul>
+    //   </React.Fragment>
+    // );
+  };
 
-/**
- * VariantSelect item
- * @param Props
- */
+// /**
+//  * VariantSelect item
+//  * @param Props
+//  */
 
-const VariantSelect: React.FC<
-  React.HTMLAttributes<HTMLLIElement> & {
-    /** Text value for label */
-    value: string;
-    /** Function that is called on happens on select */
-    onChange: () => any;
-    /** Is option active */
-    selected: boolean;
-    /** Category name */
-    name: string;
-  }
-> = ({ onChange, value, selected, name, ...props }) => {
-  return (
-    <S.InputWrap {...props} selected={selected} onClick={onChange}>
-      <input
-        type="radio"
-        name={name}
-        value={value}
-        id={value}
-        checked={selected}
-        onChange={onChange}
-      />
-      <label htmlFor={value}>{value}</label>
-    </S.InputWrap>
-  );
-};
+// const VariantSelect: React.FC<
+//   React.HTMLAttributes<HTMLLIElement> & {
+//     /** Text value for label */
+//     value: string;
+//     /** Function that is called on happens on select */
+//     onChange: () => any;
+//     /** Is option active */
+//     selected: boolean;
+//     /** Category name */
+//     name: string;
+//   }
+// > = ({ onChange, value, selected, name, ...props }) => {
+//   return (
+//     <S.InputWrap {...props} selected={selected} onClick={onChange}>
+//       <input
+//         type="radio"
+//         name={name}
+//         value={value}
+//         id={value}
+//         checked={selected}
+//         onChange={onChange}
+//       />
+//       <label htmlFor={value}>{value}</label>
+//     </S.InputWrap>
+//   );
+// };
 export default ProductHead;
