@@ -42,14 +42,14 @@ const ProductOptions = () => {
   const { cmsProduct } = useSanityProduct();
 
   const hasOptions =
-    cmsProduct.shopify.options.filter((item) => item.values.length > 1).length >
-    0;
+    cmsProduct.options.categories.filter((item) => item.values.length > 1)
+      .length > 0;
 
   if (!hasOptions) return null;
 
   return (
     <S.ProductOptions>
-      {cmsProduct.shopify.options.map(({ name, values }) => {
+      {cmsProduct.options.categories.map(({ name, values }) => {
         return <Option values={values} key={name} name={name} />;
       })}
     </S.ProductOptions>
