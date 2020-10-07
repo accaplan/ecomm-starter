@@ -37,6 +37,7 @@ const client = sanityClient(options);
  */
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log(JSON.stringify(req.body));
   const setError = (code: number, message: string, error?: any) => {
     const err = `ERROR ${code}: ${message}`;
     console.error(err);
