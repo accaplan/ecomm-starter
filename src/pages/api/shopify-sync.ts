@@ -103,7 +103,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const existingSanityProduct =
-      (existingSanityProducts && existingSanityProducts[0]?.shopify) || null;
+      (existingSanityProducts && existingSanityProducts[0]?.options) || null;
 
     /**
      * Merge variants and Options
@@ -118,7 +118,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const mergedOptions = incomingOptions.map((incomingOption) => {
       /** Get data from existing option */
-      const existingOption = existingSanityProduct?.options?.find(
+      const existingOption = existingSanityProduct?.categories?.find(
         (existingOption) => existingOption.name === incomingOption.name
       );
 
