@@ -1150,10 +1150,12 @@
   resolved "https://registry.yarnpkg.com/@tylermcrobert/modularscale/-/modularscale-1.1.0.tgz#f57b3e440301e3f94cf026db8b0ddf41c5a09857"
   integrity sha512-nwRa9fjwfv429hJlGczBNDANgCFnctVH6RFNRc/OkYPIvfUW6KocnUeVoJ/WYBbH26P7sAGAit/J7ZwSZAnsBw==
 
-"@tylermcrobert/sanity-schemas@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@tylermcrobert/sanity-schemas/-/sanity-schemas-0.1.0.tgz#e96e64751fc085eaf3d3c24aa5d74c38b382d9d5"
-  integrity sha512-TDnLEY0+Iru5HksmInJhkxHl+yZCDosGDHhLdi/X5Dj54OEUVNlvRSHiAwwDdgyhVd8d8SsqtyXOSaIHZz8FGg==
+"@tylermcrobert/sanity-schemas@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@tylermcrobert/sanity-schemas/-/sanity-schemas-0.1.1.tgz#d4e5822faa1dbd3584b529e3a716196fc5e50b8b"
+  integrity sha512-ITZ1IVSe/8xne/+Mz/J+YI6xcpGVKsoi7WAnH7qtkfarxwM+MI+DXkKoosfmE+aWut8LwS/dXCDSIQtm9vEVuQ==
+  dependencies:
+    react-icons "^3.11.0"
 
 "@tylermcrobert/shopify-react@^0.3.13":
   version "0.3.13"
@@ -2009,7 +2011,7 @@ camelcase@5.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
   integrity sha512-faqwZqnWxbxn+F1d399ygeamQNy3lPp/H9H6rNrqYh4FSVCtcY+3cub1MxA8o9mDd55mM8Aghuu/kuyYA6VTsA==
 
-camelcase@5.3.1, camelcase@^5.3.1:
+camelcase@5.3.1, camelcase@^5.0.0, camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
@@ -5023,6 +5025,13 @@ react-dom@^16.13.1:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.19.1"
+
+react-icons@^3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.11.0.tgz#2ca2903dfab8268ca18ebd8cc2e879921ec3b254"
+  integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
+  dependencies:
+    camelcase "^5.0.0"
 
 react-is@16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
