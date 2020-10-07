@@ -1150,6 +1150,11 @@
   resolved "https://registry.yarnpkg.com/@tylermcrobert/modularscale/-/modularscale-1.1.0.tgz#f57b3e440301e3f94cf026db8b0ddf41c5a09857"
   integrity sha512-nwRa9fjwfv429hJlGczBNDANgCFnctVH6RFNRc/OkYPIvfUW6KocnUeVoJ/WYBbH26P7sAGAit/J7ZwSZAnsBw==
 
+"@tylermcrobert/sanity-schemas@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@tylermcrobert/sanity-schemas/-/sanity-schemas-0.1.0.tgz#e96e64751fc085eaf3d3c24aa5d74c38b382d9d5"
+  integrity sha512-TDnLEY0+Iru5HksmInJhkxHl+yZCDosGDHhLdi/X5Dj54OEUVNlvRSHiAwwDdgyhVd8d8SsqtyXOSaIHZz8FGg==
+
 "@tylermcrobert/shopify-react@^0.3.13":
   version "0.3.13"
   resolved "https://registry.yarnpkg.com/@tylermcrobert/shopify-react/-/shopify-react-0.3.13.tgz#d47a702c033cb6c8e1307488d711ee49bc7ae98a"
