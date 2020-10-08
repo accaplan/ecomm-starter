@@ -13,5 +13,10 @@ export default {
     ...ProductInfo,
     ...ProductConfigurations(),
     ...ProductData,
+
+    {
+      type: "seo",
+      name: "seo",
+    },
   ],
 };
