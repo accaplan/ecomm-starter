@@ -33,11 +33,28 @@ export const useProductState = (product: ProductSchemaBase) => {
             : option
         );
 
-        // eslint-disable-next-line no-console
-        console.log(variants, newOptions);
+        const matchingVariant = variants.find((variant) => {
+          // Check each options and see if they both match 'newOptions'
+          const variantMatches = variant.selectedOptions
+            .map((variantCandidateOption) => {
+              const hasMatch = newOptions.find(
+                (newOption) =>
+                  newOption.categoryName ===
+                    variantCandidateOption.categoryName &&
+                  newOption.value === variantCandidateOption.value
+              );
+
+              return hasMatch;
+            })
+            .filter((a) => a);
+
+          const isMatch = variantMatches.length === newOptions.length;
+          return isMatch ? variant : null;
+        });
 
         return {
           ...state,
+          currentVariant: matchingVariant || state.currentVariant,
         };
       case "resetDefault":
         return { ...state, quantity: 1, currentVariant: variants[0] };
