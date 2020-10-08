@@ -5,6 +5,7 @@ import {
 import React, { createContext, useContext } from "react";
 import { ProductSchema } from "types";
 import { ProductState, SetQuantity, useProductState } from "./useProductState";
+import { productHelpers } from "./productHelpers";
 
 const ProductContext = createContext<{
   cmsProduct: ProductSchema;
@@ -26,7 +27,8 @@ export const useProduct = () => useContext(ProductContext);
 export const ProductProvider: React.FC<{
   cmsProduct: ProductSchema;
 }> = ({ children, cmsProduct }) => {
-  const { productState, setQuantity, setOptions } = useProductState(cmsProduct);
+  const { productState, dispatch } = useProductState(cmsProduct);
+  const { setQuantity, setOptions } = productHelpers(dispatch);
 
   return (
     <ProductContext.Provider

@@ -38,10 +38,6 @@ export const useProductState = (product: ProductSchemaBase) => {
 
         return {
           ...state,
-          // currentVariant: client.product.helpers.variantForOptions(
-          //   product,
-          //   action.options
-          // ),
         };
       case "resetDefault":
         return { ...state, quantity: 1, currentVariant: variants[0] };
@@ -58,31 +54,8 @@ export const useProductState = (product: ProductSchemaBase) => {
     currentVariant: variants[0],
   });
 
-  /**
-   * Set product quantity
-   * @param quantity Desired quantity
-   */
-  const setQuantity: SetQuantity = (quantity) =>
-    dispatch({ type: "changeQuantity", quantity });
-
-  /**
-   * Change variant based on options
-   */
-  const setOptions = (options: ProductSchemaOptionMeta) => {
-    dispatch({ type: "changeOptions", options });
-  };
-
-  const addProductToCart = () => {
-    // if (productState.currentVariant.available) {
-    //   addToCart(productState.currentVariant.id, productState.quantity);
-    // }
-  };
-
   return {
-    setOptions,
     dispatch,
     productState,
-    setQuantity,
-    addProductToCart,
   };
 };
