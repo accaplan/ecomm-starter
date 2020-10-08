@@ -1,4 +1,7 @@
-import { ProductSchemaVariant } from "sanity-shopify-toolkit";
+import {
+  ProductSchemaBase,
+  ProductSchemaVariant,
+} from "sanity-shopify-toolkit";
 import { useReducer } from "react";
 
 export type ProductState = {
@@ -7,13 +10,16 @@ export type ProductState = {
 };
 
 export type SetQuantity = (qty: number) => void;
+export type SetOptionPayload = { categoryName: string; variantName: string };
 
 export type Action =
   | { type: "changeOptions"; options: any }
   | { type: "changeQuantity"; quantity: number }
   | { type: "resetDefault" };
 
-export const useProductState = (variants: ProductSchemaVariant[]) => {
+export const useProductState = (product: ProductSchemaBase) => {
+  const { variants } = product.options;
+
   const productReducer = (
     state: ProductState,
     action: Action
@@ -52,8 +58,10 @@ export const useProductState = (variants: ProductSchemaVariant[]) => {
   /**
    * Change variant based on options
    */
-  const setOptions = () => {
-    // const setOptions = (options: object) => { // use this one
+  const setOptions = ({ categoryName, variantName }: SetOptionPayload) => {
+    // eslint-disable-next-line no-console
+    console.log({ [categoryName]: variantName });
+
     // const current = productState.currentVariant.selectedOptions.reduce(
     //   (acc, option) => ({ ...acc, [option.name]: option.value }),
     //   {}
