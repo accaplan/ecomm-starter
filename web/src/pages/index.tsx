@@ -3,6 +3,7 @@ import { Layout, ProductGrid } from "../components";
 import { client } from "./_app";
 import { client as sanityClient, urlFor } from "lib/sanity";
 import { ProductSchema } from "types";
+import Link from "next/link";
 
 const Index: React.FC<{
   products: Product[];
@@ -12,12 +13,18 @@ const Index: React.FC<{
     <Layout>
       <ProductGrid>
         {sanityProducts.map((product) => (
-          <a href={`/products/${product.slug.current}`} key={product._id}>
-            <div>
-              <img src={urlFor(product.image).url() || ""} />
-              <h2>{product.title}</h2>
-            </div>
-          </a>
+          <Link
+            as={`/products/${product.slug.current}`}
+            href="/products/[handle]"
+            key={product._id}
+          >
+            <a>
+              <div>
+                <img src={urlFor(product.image).url() || ""} />
+                <h2>{product.title}</h2>
+              </div>
+            </a>
+          </Link>
         ))}
       </ProductGrid>
     </Layout>
