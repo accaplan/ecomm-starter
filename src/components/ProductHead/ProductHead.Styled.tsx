@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import { color, size } from "style";
 import { AddToCartButton } from "@tylermcrobert/shopify-react";
+import { mq } from "style";
 
 const ProductHead = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${size[0]};
+  grid-gap: ${size[0]};
+
+  @media ${mq.sm} {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const AddToCart = styled(AddToCartButton)<{ unavailable: boolean }>`
