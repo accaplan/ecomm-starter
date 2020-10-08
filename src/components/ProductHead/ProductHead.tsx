@@ -114,7 +114,7 @@ const VariantSelect: React.FC<
   }
 > = ({ onChange, value, selected, name, ...props }) => {
   return (
-    <S.InputWrap {...props} selected={selected} onClick={onChange}>
+    <S.InputWrap {...props} selected={selected}>
       <input
         type="radio"
         name={name}
