@@ -21,22 +21,23 @@ const ProductOptions = styled.div`
 
   ul {
     display: flex;
-
-    li {
-      text-align: center;
-      padding: ${size[0]};
-    }
   }
 `;
 
 const InputWrap = styled.li<{ selected: boolean }>`
-  background: ${(p) => p.selected && color.primary};
-  color: ${(p) => p.selected && "white"};
-  cursor: pointer;
-  display: block;
-
   input[type="radio"] {
     display: none;
+
+    &:checked + label {
+      background: ${color.primary};
+      color: white;
+    }
+  }
+  label {
+    cursor: pointer;
+    padding: ${size.sm} ${size[0]};
+    display: inline-block;
+    border-radius: 999px;
   }
 `;
 
