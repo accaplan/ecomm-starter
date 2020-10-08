@@ -6,7 +6,7 @@ import React from "react";
 import S from "./ProductHead.Styled";
 
 const ProductHead = () => {
-  const { cmsProduct, productState, setQuantity } = useProduct();
+  const { cmsProduct, productState, setQuantity, addToCart } = useProduct();
 
   return (
     <S.ProductHead>
@@ -24,7 +24,7 @@ const ProductHead = () => {
           onUpdate={(num) => setQuantity(num)}
           value={productState.quantity}
         />
-        {/* <S.AddToCart unavailable={!productState.currentVariant.isAvailable} /> */}
+        <button onClick={addToCart}>Add to cart</button>
       </div>
     </S.ProductHead>
   );
