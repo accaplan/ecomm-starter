@@ -5317,10 +5317,10 @@ same-origin@^0.1.1:
   resolved "https://registry.yarnpkg.com/same-origin/-/same-origin-0.1.1.tgz#c2287d3192577df517acbbd6d1451a9c3c3914f5"
   integrity sha1-wih9MZJXffUXrLvW0UUanDw5FPU=
 
-sanity-shopify-toolkit@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/sanity-shopify-toolkit/-/sanity-shopify-toolkit-0.1.2.tgz#857e87f97d195fe26717ccba10a846ec5a041c7e"
-  integrity sha512-SzTBrZblXbdYEhiU+Dtr5xumtpJlZG9qvjaw18UArJRli18x+VPKei+p+G5+Uqut95UsbtY7rG6O3PG13Qqp7A==
+sanity-shopify-toolkit@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/sanity-shopify-toolkit/-/sanity-shopify-toolkit-0.1.3.tgz#3e6d7732145f8a8ae09128c54ad66cc2deab0ffd"
+  integrity sha512-izeDlMfC9HOJ/fOBN/BQAB6qU30F809x4JSlftl0vAqjziFy8RTEKP+Vw71+DSoA+2spFDE1BHJTXmyOxaO6pQ==
 
 sass-loader@8.0.2:
   version "8.0.2"
