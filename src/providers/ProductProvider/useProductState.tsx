@@ -1,6 +1,7 @@
 import {
   ProductSchemaBase,
   ProductSchemaVariant,
+  ProductSchemaOptionMeta,
 } from "sanity-shopify-toolkit";
 import { useReducer } from "react";
 
@@ -10,10 +11,9 @@ export type ProductState = {
 };
 
 export type SetQuantity = (qty: number) => void;
-export type SetOptionPayload = { categoryName: string; variantName: string };
 
 export type Action =
-  | { type: "changeOptions"; options: any }
+  | { type: "changeOptions"; options: ProductSchemaOptionMeta }
   | { type: "changeQuantity"; quantity: number }
   | { type: "resetDefault" };
 
@@ -26,6 +26,16 @@ export const useProductState = (product: ProductSchemaBase) => {
   ): ProductState => {
     switch (action.type) {
       case "changeOptions":
+        const currentEnabledOptions = state.currentVariant.selectedOptions;
+        const newOptions = currentEnabledOptions.map((option) =>
+          option.categoryName === action.options.categoryName
+            ? action.options
+            : option
+        );
+
+        // eslint-disable-next-line no-console
+        console.log(variants, newOptions);
+
         return {
           ...state,
           // currentVariant: client.product.helpers.variantForOptions(
@@ -58,15 +68,8 @@ export const useProductState = (product: ProductSchemaBase) => {
   /**
    * Change variant based on options
    */
-  const setOptions = ({ categoryName, variantName }: SetOptionPayload) => {
-    // eslint-disable-next-line no-console
-    console.log({ [categoryName]: variantName });
-
-    // const current = productState.currentVariant.selectedOptions.reduce(
-    //   (acc, option) => ({ ...acc, [option.name]: option.value }),
-    //   {}
-    // );
-    // dispatch({ type: "changeOptions", options: { ...current, ...options } });
+  const setOptions = (options: ProductSchemaOptionMeta) => {
+    dispatch({ type: "changeOptions", options });
   };
 
   const addProductToCart = () => {

@@ -1,18 +1,16 @@
-import { ProductSchemaVariant } from "sanity-shopify-toolkit";
+import {
+  ProductSchemaVariant,
+  ProductSchemaOptionMeta,
+} from "sanity-shopify-toolkit";
 import React, { createContext, useContext } from "react";
 import { ProductSchema } from "types";
-import {
-  ProductState,
-  SetOptionPayload,
-  SetQuantity,
-  useProductState,
-} from "./useProductState";
+import { ProductState, SetQuantity, useProductState } from "./useProductState";
 
 const ProductContext = createContext<{
   cmsProduct: ProductSchema;
   productState: ProductState;
   setQuantity: SetQuantity;
-  setOptions: (options: SetOptionPayload) => void;
+  setOptions: (options: ProductSchemaOptionMeta) => void;
 }>({
   cmsProduct: (null as unknown) as ProductSchema,
   productState: {

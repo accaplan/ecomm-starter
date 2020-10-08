@@ -51,15 +51,20 @@ const ProductOptions = () => {
   );
 };
 
+/** TODO:Figure out why shit in here is firing 2x or 3x on click */
 const Option: React.FC<{
   variants: ProductSchemaOptionCategoryValue[];
   name: string;
 }> = ({ variants, name }) => {
   const { productState, setOptions } = useProduct();
 
-  /** TODO: Fix this to be more accurate. currently if there are two 'blue' variants, they'll both show active */
-  const isSelected = (optionValue: string) =>
-    productState.currentVariant.title.split(" / ").includes(optionValue);
+  const isSelected = (categoryName: string, optionValue: string) => {
+    return (
+      productState.currentVariant.selectedOptions.findIndex(
+        (i) => i.categoryName === categoryName && i.value == optionValue
+      ) !== -1
+    );
+  };
 
   return (
     <React.Fragment>
@@ -67,7 +72,8 @@ const Option: React.FC<{
       <ul>
         {variants.map((variant) => {
           const value = variant.title;
-          const selected = isSelected(value);
+          const selected = isSelected(name, value);
+
           return (
             value !== "Default Title" && (
               <VariantSelect
@@ -75,7 +81,7 @@ const Option: React.FC<{
                 onChange={() =>
                   setOptions({
                     categoryName: name,
-                    variantName: variant.title,
+                    value: variant.title,
                   })
                 }
                 value={value}
