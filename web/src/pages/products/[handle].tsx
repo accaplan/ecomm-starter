@@ -1,20 +1,14 @@
-import { Product } from "@tylermcrobert/shopify-react";
 import { Layout } from "components";
 import ProductHead from "components/ProductHead/ProductHead";
-import { fetchProduct } from "lib/sanity";
-import { NextPage } from "next";
-import { client } from "pages/_app";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { client } from "lib/sanity";
 import React from "react";
 import { ProductSchema } from "types";
 import Error from "next/error";
 import { ProductProvider } from "providers";
 
-const PDP: NextPage<{ product: Product; cmsProduct: ProductSchema }> = ({
-  product,
-  cmsProduct,
-}) => {
-  if (!product || !cmsProduct) {
-    if (!product) console.error("Cannot find Product from Shopify Buy SDK.");
+const PDP: NextPage<{ cmsProduct: ProductSchema }> = ({ cmsProduct }) => {
+  if (!cmsProduct) {
     if (!cmsProduct) console.error("Cannot find Product from Sanity.");
     return <Error statusCode={404} />;
   }
@@ -27,16 +21,29 @@ const PDP: NextPage<{ product: Product; cmsProduct: ProductSchema }> = ({
   );
 };
 
-PDP.getInitialProps = async (ctx) => {
-  const product = await client.product.fetchByHandle(
-    ctx.query.handle?.toString()
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const cmsProduct = await client.fetch(
+    `*[_type == 'product' && slug.current == '${params?.handle}'][0]`
   );
 
-  const cmsProduct = await fetchProduct(
-    ctx.query.handle?.toString() || "",
-    false
-  );
-  return { product, cmsProduct };
+  return {
+    props: { cmsProduct: cmsProduct || null },
+    revalidate: 1,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const products = await client.fetch(`*[_type == 'product']{ slug }`);
+  const uids = products.map((product: any) => product.slug.current);
+
+  return {
+    paths: [
+      ...uids.map((uid: string) => ({
+        params: { handle: uid },
+      })),
+    ],
+    fallback: true,
+  };
 };
 
 export default PDP;
