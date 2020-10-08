@@ -4,6 +4,9 @@ import { clientOptions } from "lib/sanity";
 import { shopifySync } from "sanity-shopify-toolkit";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(req.body));
+
   shopifySync({
     req,
     res,
