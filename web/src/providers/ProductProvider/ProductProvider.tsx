@@ -5,7 +5,6 @@ import {
 import React, { createContext, useContext } from "react";
 import { ProductSchema } from "types";
 import { ProductState, SetQuantity, useProductState } from "./useProductState";
-import { productHelpers } from "./productHelpers";
 import { useCart } from "@tylermcrobert/shopify-react";
 
 const ProductContext = createContext<{
@@ -32,7 +31,6 @@ export const ProductProvider: React.FC<{
 }> = ({ children, cmsProduct }) => {
   const { addToCart: addProduct } = useCart();
   const { productState, dispatch } = useProductState(cmsProduct);
-  const { setQuantity, setOptions } = productHelpers(dispatch);
 
   /**
    * Add current variant/qty to cart
@@ -41,6 +39,20 @@ export const ProductProvider: React.FC<{
     const data = JSON.parse(productState.currentVariant.data);
     const formattedVariant = btoa(data.admin_graphql_api_id);
     addProduct(formattedVariant, productState.quantity);
+  };
+
+  /**
+   * Set product quantity
+   * @param quantity Desired quantity
+   */
+  const setQuantity: SetQuantity = (quantity) =>
+    dispatch({ type: "changeQuantity", quantity });
+
+  /**
+   * Change variant based on options
+   */
+  const setOptions = (options: ProductSchemaOptionMeta) => {
+    dispatch({ type: "changeOptions", options });
   };
 
   return (
