@@ -14,7 +14,6 @@
     "sanity"
   ],
   "dependencies": {
-    "@tylermcrobert/sanity-schemas": "link:../i/d/k",
     "@sanity/base": "^1.150.7",
     "@sanity/color-input": "^1.150.1",
     "@sanity/components": "^1.150.7",

@@ -1150,13 +1150,6 @@
   resolved "https://registry.yarnpkg.com/@tylermcrobert/modularscale/-/modularscale-1.1.0.tgz#f57b3e440301e3f94cf026db8b0ddf41c5a09857"
   integrity sha512-nwRa9fjwfv429hJlGczBNDANgCFnctVH6RFNRc/OkYPIvfUW6KocnUeVoJ/WYBbH26P7sAGAit/J7ZwSZAnsBw==
 
-"@tylermcrobert/sanity-schemas@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@tylermcrobert/sanity-schemas/-/sanity-schemas-0.1.1.tgz#d4e5822faa1dbd3584b529e3a716196fc5e50b8b"
-  integrity sha512-ITZ1IVSe/8xne/+Mz/J+YI6xcpGVKsoi7WAnH7qtkfarxwM+MI+DXkKoosfmE+aWut8LwS/dXCDSIQtm9vEVuQ==
-  dependencies:
-    react-icons "^3.11.0"
-
 "@tylermcrobert/shopify-react@^0.3.13":
   version "0.3.13"
   resolved "https://registry.yarnpkg.com/@tylermcrobert/shopify-react/-/shopify-react-0.3.13.tgz#d47a702c033cb6c8e1307488d711ee49bc7ae98a"
@@ -2011,7 +2004,7 @@ camelcase@5.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
   integrity sha512-faqwZqnWxbxn+F1d399ygeamQNy3lPp/H9H6rNrqYh4FSVCtcY+3cub1MxA8o9mDd55mM8Aghuu/kuyYA6VTsA==
 
-camelcase@5.3.1, camelcase@^5.0.0, camelcase@^5.3.1:
+camelcase@5.3.1, camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
@@ -5026,13 +5019,6 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-icons@^3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.11.0.tgz#2ca2903dfab8268ca18ebd8cc2e879921ec3b254"
-  integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
-  dependencies:
-    camelcase "^5.0.0"
-
 react-is@16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -5330,6 +5316,11 @@ same-origin@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/same-origin/-/same-origin-0.1.1.tgz#c2287d3192577df517acbbd6d1451a9c3c3914f5"
   integrity sha1-wih9MZJXffUXrLvW0UUanDw5FPU=
+
+sanity-shopify-toolkit@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/sanity-shopify-toolkit/-/sanity-shopify-toolkit-0.1.1.tgz#7dea8843f4f49133988184d90ae0d5b9acbb09f9"
+  integrity sha512-rZj6t5vH+hms6VaI1XALNL7hWpSbGEYjMu++II0YI1P9JcauwZk6Ref+ZEDOqFz/jsONhGFWuq3lVbeGztJyHQ==
 
 sass-loader@8.0.2:
   version "8.0.2"

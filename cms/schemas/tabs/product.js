@@ -3,7 +3,7 @@ import {
   ProductInfo,
   ProductConfigurations,
   ProductData,
-} from "@tylermcrobert/sanity-schemas";
+} from "sanity-shopify-toolkit";
 
 export default {
   ...product,

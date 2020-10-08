@@ -1,4 +1,4 @@
-import { ProductSchemaVariant } from "@tylermcrobert/sanity-schemas";
+import { ProductSchemaVariant } from "sanity-shopify-toolkit";
 import { useReducer } from "react";
 
 export type ProductState = {

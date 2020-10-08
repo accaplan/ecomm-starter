@@ -3,7 +3,7 @@ import {
   ProductSchemaBasicInfo,
   ProductSchemaOptions,
   ProductSchemaShopifyData,
-} from "@tylermcrobert/sanity-schemas";
+} from "sanity-shopify-toolkit";
 
 export type ProductSchema = {} & SanityDocument &
   ProductSchemaBasicInfo &

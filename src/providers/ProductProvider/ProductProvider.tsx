@@ -1,4 +1,4 @@
-import { ProductSchemaVariant } from "@tylermcrobert/sanity-schemas";
+import { ProductSchemaVariant } from "sanity-shopify-toolkit";
 import React, { createContext, useContext } from "react";
 import { ProductSchema } from "types";
 import { ProductState, SetQuantity, useProductState } from "./useProductState";

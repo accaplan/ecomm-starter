@@ -1,4 +1,4 @@
-import { ProductSchemaOptionCategoryValue } from "@tylermcrobert/sanity-schemas";
+import { ProductSchemaOptionCategoryValue } from "sanity-shopify-toolkit";
 import { QtySelect } from "components";
 import { urlFor } from "lib/sanity";
 import { useProduct } from "providers";

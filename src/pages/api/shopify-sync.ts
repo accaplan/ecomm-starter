@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import "node-fetch";
 import { clientOptions } from "lib/sanity";
-import { shopifySync } from "@tylermcrobert/sanity-schemas";
+import { shopifySync } from "sanity-shopify-toolkit";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   shopifySync({
